@@ -7,6 +7,8 @@ export const SITE = {
   description:
     'Pflichtteil verständlich erklärt: Rechner, Quick-Check, Ratgeber und Musterschreiben. Mit fachlicher Prüfung durch unsere Partnerkanzlei.',
   email: 'info@pflichtteilsretter.de',
+  // Suchmaschinen erst zum Livegang zulassen: in Netlify die Umgebungsvariable PUBLIC_LIVE=true setzen
+  live: import.meta.env.PUBLIC_LIVE === 'true',
 };
 
 // Betreiber = Anbieter im Sinne von § 5 DDG

@@ -59,6 +59,7 @@ Danach Fließtext in Markdown mit `##`-Überschriften (werden automatisch zum In
 - [ ] AV-Vertrag und Verschwiegenheitsvereinbarung GSP ↔ Pixelnerds
 - [ ] Alle Artikel, Rechenlogik und Quick-Check fachlich durch GSP freigeben
 - [ ] Domain verbinden, Google Search Console einrichten, Sitemap einreichen
+- [ ] **Livegang:** in Netlify unter Site configuration → Environment variables `PUBLIC_LIVE` = `true` setzen und neu deployen. Ohne diese Variable ist jede Seite auf `noindex` (Schutz der Testversion).
 
 ## Hosting & Deployment
 
