@@ -1,0 +1,86 @@
+---
+import Base from '../../../layouts/Base.astro';
+import CtaBox from '../../../components/CtaBox.astro';
+import { getCollection, render } from 'astro:content';
+import { clusterBySlug } from '../../../data/clusters';
+import { KANZLEI, BETREIBER, SITE } from '../../../config';
+
+export async function getStaticPaths() {
+  const all = await getCollection('artikel');
+  return all.map((a) => ({ params: { cluster: a.data.cluster, slug: a.id }, props: { artikel: a, all } }));
+}
+const { artikel, all } = Astro.props;
+const d = artikel.data;
+const cluster = clusterBySlug(d.cluster);
+const { Content, headings } = await render(artikel);
+const toc = headings.filter((h) => h.depth === 2);
+const verwandt = d.verwandt.length
+  ? d.verwandt.map((id) => all.find((a) => a.id === id)).filter(Boolean)
+  : all.filter((a) => a.data.cluster === d.cluster && a.id !== artikel.id).slice(0, 3);
+const datum = d.stand.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
+const url = `${SITE.url}/ratgeber/${d.cluster}/${artikel.id}/`;
+const schema: object[] = [
+  {
+    '@context': 'https://schema.org', '@type': 'Article', headline: d.title, description: d.description,
+    dateModified: d.stand.toISOString().slice(0, 10), mainEntityOfPage: url, inLanguage: 'de-DE',
+    author: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    reviewedBy: { '@type': 'Person', name: KANZLEI.pruefer },
+    publisher: { '@type': 'Organization', name: BETREIBER.firma },
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Start', item: SITE.url + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Ratgeber', item: SITE.url + '/ratgeber/' },
+      { '@type': 'ListItem', position: 3, name: cluster.name, item: `${SITE.url}/ratgeber/${cluster.slug}/` },
+      { '@type': 'ListItem', position: 4, name: d.title, item: url },
+    ],
+  },
+];
+if (d.faq.length) schema.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
+---
+<Base title={d.metaTitle ?? d.title} description={d.description} schema={schema}>
+  <div class="container">
+    <header class="article-head narrow">
+      <nav class="breadcrumbs"><a href="/">Start</a> › <a href="/ratgeber/">Ratgeber</a> › <a href={`/ratgeber/${cluster.slug}/`}>{cluster.name}</a></nav>
+      <h1>{d.title}</h1>
+      <div class="byline">
+        <span>Stand: {datum}</span>
+        <span>{d.lesezeit} Min. Lesezeit</span>
+        <span>Fachlich geprüft von {KANZLEI.pruefer}</span>
+      </div>
+    </header>
+    <div class="layout-article">
+      <article>
+        <div class="kurzantwort"><strong>Kurz gesagt</strong>{d.kurzantwort}</div>
+        <div class="prose"><Content /></div>
+        {d.faq.length > 0 && (
+          <section>
+            <h2>Häufige Fragen</h2>
+            {d.faq.map((f) => <details class="faq"><summary>{f.q}</summary><p>{f.a}</p></details>)}
+          </section>
+        )}
+        <CtaBox variant="anfrage" />
+        <p class="small muted">Dieser Artikel enthält allgemeine Informationen und ersetzt keine Rechtsberatung im Einzelfall. Rechtsstand: {datum}.</p>
+        {verwandt.length > 0 && (
+          <section>
+            <h2>Weiterlesen</h2>
+            <div class="grid grid-3">
+              {verwandt.map((a) => a && (
+                <a class="card card-link" href={`/ratgeber/${a.data.cluster}/${a.id}/`}><h3 style="font-size:1.05rem;margin:0">{a.data.title}</h3></a>
+              ))}
+            </div>
+          </section>
+        )}
+      </article>
+      <aside class="sidebar">
+        {toc.length > 2 && (
+          <nav class="card toc" aria-label="Inhalt">
+            <strong style="display:block;margin-bottom:8px">Inhalt</strong>
+            <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+          </nav>
+        )}
+        <CtaBox variant={d.cta === 'anfrage' ? 'rechner' : d.cta} />
+      </aside>
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,96 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { KANZLEI } from '../config';
+import { CLUSTERS } from '../data/clusters';
+
+const artikel = (await getCollection('artikel')).sort((a, b) => a.data.order - b.data.order);
+const top = artikel.filter((a) => a.data.pillar).slice(0, 6);
+const faq = [
+  { q: 'Wer hat Anspruch auf den Pflichtteil?', a: 'Kinder (und deren Abkömmlinge), Ehegatten bzw. eingetragene Lebenspartner sowie die Eltern, wenn keine Kinder vorhanden sind. Geschwister und Lebensgefährten haben keinen Pflichtteil.' },
+  { q: 'Wie hoch ist der Pflichtteil?', a: 'Die Hälfte des gesetzlichen Erbteils, ausgezahlt in Geld. Ein Einzelkind ohne Geschwister und ohne überlebenden Ehegatten der verstorbenen Person hat zum Beispiel einen Pflichtteil von 1/2 des Nachlasses.' },
+  { q: 'Wie lange habe ich Zeit, den Pflichtteil zu fordern?', a: 'Der Anspruch verjährt in drei Jahren, gerechnet ab dem Ende des Jahres, in dem Sie vom Erbfall und Ihrer Enterbung erfahren haben.' },
+  { q: 'Zählen Schenkungen zu Lebzeiten mit?', a: 'Ja. Schenkungen der letzten zehn Jahre können über die Pflichtteilsergänzung hinzugerechnet werden, abgeschmolzen um ein Zehntel pro Jahr.' },
+];
+const schema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+---
+<Base title="Pflichtteilsretter – Pflichtteil berechnen, verstehen, durchsetzen" description="Enterbt? Pflichtteil berechnen, Fristen prüfen und Ansprüche durchsetzen: Rechner, Quick-Check und Ratgeber, fachlich geprüft von unserer Partnerkanzlei." schema={schema}>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Enterbt oder benachteiligt?</span>
+        <h1>Ihr Pflichtteil ist Ihr Recht.</h1>
+        <p class="lead">Wir erklären verständlich, was Ihnen zusteht, wie Sie es berechnen und wie Sie es durchsetzen. Für Ihren Einzelfall hilft unsere Partnerkanzlei.</p>
+        <div class="hero-actions">
+          <a href="/rechner/" class="btn btn-cta">Pflichtteil berechnen</a>
+          <a href="/quick-check/" class="btn btn-ghost">Quick-Check in 60 Sek.</a>
+        </div>
+        <ul class="trust">
+          <li>Inhalte von Rechtsanwälten geprüft</li>
+          <li>Rechner ohne Anmeldung</li>
+          <li>Keine Datenweitergabe ohne Anfrage</li>
+        </ul>
+      </div>
+      <div class="card" style="padding:28px">
+        <span class="badge">Beispielrechnung</span>
+        <h3 style="margin:12px 0 4px">Vater verstorben, Ehefrau Alleinerbin, zwei Kinder</h3>
+        <p class="muted small">Nachlass 400.000 €, Zugewinngemeinschaft, keine Schenkungen</p>
+        <table style="width:100%;border-collapse:collapse;font-size:.95rem">
+          <tr><td style="padding:6px 0;border-bottom:1px solid var(--line)">Gesetzlicher Erbteil je Kind</td><td style="text-align:right;border-bottom:1px solid var(--line)">1/4</td></tr>
+          <tr><td style="padding:6px 0;border-bottom:1px solid var(--line)">Pflichtteilsquote</td><td style="text-align:right;border-bottom:1px solid var(--line)">1/8</td></tr>
+          <tr><td style="padding:10px 0 0;font-weight:700">Pflichtteil je Kind</td><td style="text-align:right;font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--brand)">50.000 €</td></tr>
+        </table>
+        <a href="/rechner/" class="small" style="display:inline-block;margin-top:12px">Eigenen Fall berechnen →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 style="margin-top:0">In drei Schritten zu Ihrem Pflichtteil</h2>
+      <div class="grid grid-3">
+        <a class="card card-link" href="/quick-check/"><div class="icon">①</div><h3>Anspruch prüfen</h3><p class="muted">Sind Sie pflichtteilsberechtigt, und läuft schon eine Frist? Der Quick-Check sagt es Ihnen in 60 Sekunden.</p></a>
+        <a class="card card-link" href="/rechner/"><div class="icon">②</div><h3>Höhe berechnen</h3><p class="muted">Quote, Nachlass, Schenkungen der letzten 10 Jahre: Der Rechner zeigt, womit Sie rechnen können.</p></a>
+        <a class="card card-link" href="/anwalt-finden/"><div class="icon">③</div><h3>Durchsetzen</h3><p class="muted">Selbst fordern oder mit Anwalt? Vergleichen Sie die Wege und lassen Sie Ihren Fall prüfen.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <span class="eyebrow">Ratgeber</span>
+      <h2 style="margin-top:6px">Die wichtigsten Fragen zum Pflichtteil</h2>
+      <div class="grid grid-3">
+        {top.map((a) => (
+          <a class="card card-link" href={`/ratgeber/${a.data.cluster}/${a.id}/`}>
+            <span class="badge">{CLUSTERS.find((c) => c.slug === a.data.cluster)?.name}</span>
+            <h3 style="margin-top:10px">{a.data.title}</h3>
+            <p class="muted small" style="margin:0">{a.data.description}</p>
+          </a>
+        ))}
+      </div>
+      <p style="margin-top:20px"><a href="/ratgeber/" class="btn btn-ghost">Alle Ratgeber-Artikel</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2" style="gap:48px;align-items:start">
+      <div>
+        <h2 style="margin-top:0">Häufige Fragen</h2>
+        {faq.map((f) => <details class="faq"><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+      <div class="card">
+        <span class="badge badge-partner">Partnerkanzlei</span>
+        <h2 style="margin-top:12px;font-size:1.5rem">Persönliche Hilfe von {KANZLEI.name}</h2>
+        <p>Für Ihren konkreten Fall arbeiten wir mit {KANZLEI.name} zusammen. Die Kanzlei prüft auch die Inhalte dieses Portals fachlich.</p>
+        <ul>
+          {KANZLEI.kostenloseErsteinschaetzung && <li>Kostenlose Ersteinschätzung Ihres Falls</li>}
+          <li>Antwort {KANZLEI.antwortzeit}</li>
+          {KANZLEI.bundesweit && <li>Bundesweit, auch per Telefon und Video</li>}
+        </ul>
+        <a href="/anwalt-finden/#anfrage" class="btn btn-cta">Fall prüfen lassen</a>
+        <p class="disclosure">{KANZLEI.name} finanziert dieses Portal mit einer festen Vergütung. <a href="/ueber-uns/">Transparenz</a></p>
+      </div>
+    </div>
+  </section>
+</Base>

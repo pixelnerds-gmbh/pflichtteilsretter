@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { KANZLEI } from '../config';
+---
+<Base title="Vielen Dank für Ihre Anfrage" noindex>
+  <section class="container narrow" style="padding:72px 20px">
+    <span class="eyebrow">Anfrage gesendet</span>
+    <h1>Vielen Dank!</h1>
+    <p class="lead">Ihre Anfrage ist bei {KANZLEI.name} eingegangen. Sie erhalten eine Antwort {KANZLEI.antwortzeit}.</p>
+    <h2>Was Sie bis dahin vorbereiten können</h2>
+    <ul>
+      <li>Testament oder Erbvertrag und Eröffnungsprotokoll des Nachlassgerichts</li>
+      <li>Sterbeurkunde und ggf. Erbschein</li>
+      <li>Bisherige Schreiben mit den Erben</li>
+      <li>Ihnen bekannte Angaben zu Immobilien, Konten und Schenkungen</li>
+    </ul>
+    <p><a href="/ratgeber/" class="btn btn-ghost">Zum Ratgeber</a></p>
+  </section>
+</Base>

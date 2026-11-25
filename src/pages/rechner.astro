@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBox from '../components/CtaBox.astro';
+const faq = [
+  { q: 'Wie wird der Pflichtteil berechnet?', a: 'Der Pflichtteil beträgt die Hälfte des gesetzlichen Erbteils (§ 2303 BGB), bezogen auf den Nettonachlass zum Zeitpunkt des Todes. Schenkungen der letzten zehn Jahre können über die Pflichtteilsergänzung hinzukommen.' },
+  { q: 'Wie genau ist der Rechner?', a: 'Der Rechner bildet die Grundfälle der gesetzlichen Erbfolge ab. Anrechnungen, Ausgleichungen, Unternehmensbewertungen oder Auslandsbezug berücksichtigt er nicht. Er ersetzt keine Prüfung im Einzelfall.' },
+  { q: 'Werden meine Eingaben gespeichert?', a: 'Nein. Die Berechnung läuft vollständig in Ihrem Browser. Es werden keine Eingaben an uns übertragen.' },
+];
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Pflichtteilsrechner', applicationCategory: 'FinanceApplication', operatingSystem: 'Web', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' } },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base title="Pflichtteilsrechner 2026: Pflichtteil online berechnen" description="Kostenloser Pflichtteilsrechner: Quote, Pflichtteil und Pflichtteilsergänzung bei Schenkungen in zwei Minuten berechnen. Läuft komplett im Browser." schema={schema}>
+  <section class="hero" style="padding-bottom:16px">
+    <div class="container narrow">
+      <span class="eyebrow">Kostenlos · ohne Anmeldung · nichts wird gespeichert</span>
+      <h1>Pflichtteilsrechner</h1>
+      <p class="lead muted">Berechnen Sie Ihre Pflichtteilsquote, den Pflichtteil und die Ergänzung für Schenkungen der letzten zehn Jahre.</p>
+    </div>
+  </section>
+
+  <section class="container narrow">
+    <form id="rechner" class="card form-grid" novalidate>
+      <fieldset>
+        <legend>1. Wer sind Sie im Verhältnis zur verstorbenen Person?</legend>
+        <div class="choice">
+          <label><input type="radio" name="rolle" value="kind" checked /> Kind</label>
+          <label><input type="radio" name="rolle" value="ehegatte" /> Ehegatte / eingetr. Lebenspartner</label>
+          <label><input type="radio" name="rolle" value="elternteil" /> Elternteil</label>
+        </div>
+      </fieldset>
+
+      <fieldset id="f-ehe">
+        <legend>2. War die verstorbene Person verheiratet? <span class="hint">(Ehegatte, der nicht Sie sind)</span></legend>
+        <div class="choice">
+          <label><input type="radio" name="ehe" value="nein" checked /> Nein / verwitwet / geschieden</label>
+          <label><input type="radio" name="ehe" value="zugewinn" /> Ja, Zugewinngemeinschaft</label>
+          <label><input type="radio" name="ehe" value="trennung" /> Ja, Gütertrennung</label>
+          <label><input type="radio" name="ehe" value="gemeinschaft" /> Ja, Gütergemeinschaft</label>
+        </div>
+        <p class="hint" style="margin-top:8px">Ohne Ehevertrag gilt automatisch die Zugewinngemeinschaft.</p>
+      </fieldset>
+
+      <fieldset id="f-gueter" class="hidden">
+        <legend>2. In welchem Güterstand lebten Sie?</legend>
+        <div class="choice">
+          <label><input type="radio" name="gueter" value="zugewinn" checked /> Zugewinngemeinschaft</label>
+          <label><input type="radio" name="gueter" value="trennung" /> Gütertrennung</label>
+          <label><input type="radio" name="gueter" value="gemeinschaft" /> Gütergemeinschaft</label>
+        </div>
+      </fieldset>
+
+      <div id="f-kinder">
+        <label for="kinder">3. Wie viele Kinder hatte die verstorbene Person? <span class="hint" id="kinder-hint">(einschließlich Ihnen; vorverstorbene Kinder mit eigenen Kindern mitzählen)</span></label>
+        <input type="number" id="kinder" name="kinder" min="0" max="20" value="2" inputmode="numeric" />
+      </div>
+
+      <fieldset id="f-eltern" class="hidden">
+        <legend>3. Leben beide Eltern der verstorbenen Person noch?</legend>
+        <div class="choice">
+          <label><input type="radio" name="eltern" value="beide" checked /> Ja, beide</label>
+          <label><input type="radio" name="eltern" value="einer" id="eltern-einer" /> Nein, nur einer</label>
+          <label id="eltern-keine-wrap"><input type="radio" name="eltern" value="keine" /> Keine Eltern / Geschwister mehr</label>
+        </div>
+      </fieldset>
+
+      <div>
+        <label for="nachlass">4. Wert des Nachlasses in Euro <span class="hint">(Vermögen minus Schulden und Beerdigungskosten)</span></label>
+        <input type="number" id="nachlass" name="nachlass" min="0" step="1000" value="300000" inputmode="decimal" />
+        <details style="margin-top:10px"><summary class="small" style="cursor:pointer">Nachlass aus Einzelposten berechnen</summary>
+          <div class="form-row" style="margin-top:12px">
+            <div><label for="n-immo">Immobilien (Verkehrswert)</label><input type="number" id="n-immo" class="n-plus" min="0" step="1000" /></div>
+            <div><label for="n-konto">Konten, Depots, Bargeld</label><input type="number" id="n-konto" class="n-plus" min="0" step="1000" /></div>
+            <div><label for="n-sonst">Sonstiges (Auto, Schmuck, Beteiligungen)</label><input type="number" id="n-sonst" class="n-plus" min="0" step="1000" /></div>
+            <div><label for="n-schuld">Schulden des Verstorbenen</label><input type="number" id="n-schuld" class="n-minus" min="0" step="1000" /></div>
+            <div><label for="n-beerd">Beerdigungskosten</label><input type="number" id="n-beerd" class="n-minus" min="0" step="500" /></div>
+          </div>
+        </details>
+      </div>
+
+      <div>
+        <label for="erbfall">5. Datum des Todesfalls</label>
+        <input type="date" id="erbfall" name="erbfall" />
+      </div>
+
+      <fieldset>
+        <legend>6. Schenkungen der verstorbenen Person in den letzten 10 Jahren <span class="hint">(optional)</span></legend>
+        <div id="schenkungen" class="form-grid"></div>
+        <button type="button" id="add-schenkung" class="btn btn-ghost btn-small" style="margin-top:10px">+ Schenkung hinzufügen</button>
+      </fieldset>
+
+      <button type="submit" class="btn btn-cta">Pflichtteil berechnen</button>
+      <p class="hint" style="margin:0">Die Berechnung erfolgt ausschließlich in Ihrem Browser. Es werden keine Daten übertragen.</p>
+    </form>
+
+    <div id="ergebnis" class="result hidden" aria-live="polite" style="margin-top:24px"></div>
+
+    <template id="tpl-schenkung">
+      <div class="card" style="padding:16px;box-shadow:none">
+        <div class="form-row">
+          <div><label>Wert der Schenkung (€)</label><input type="number" class="s-wert" min="0" step="1000" /></div>
+          <div><label>Datum der Schenkung</label><input type="date" class="s-datum" /></div>
+        </div>
+        <div class="choice" style="margin-top:10px">
+          <label><input type="checkbox" class="s-ehegatte" /> an den Ehegatten</label>
+          <label><input type="checkbox" class="s-niess" /> Nießbrauch/Wohnrecht vorbehalten</label>
+          <button type="button" class="btn btn-small s-del" style="color:var(--bad)">Entfernen</button>
+        </div>
+      </div>
+    </template>
+
+    <h2>So rechnet der Pflichtteilsrechner</h2>
+    <p>Der Pflichtteil ist die Hälfte des gesetzlichen Erbteils (§ 2303 BGB). Der gesetzliche Erbteil hängt davon ab, wer neben Ihnen erbt: Kinder teilen sich zu gleichen Teilen, ein Ehegatte erhält neben Kindern bei Zugewinngemeinschaft die Hälfte (§§ 1931, 1371 BGB), bei Gütertrennung je nach Kinderzahl ein Halb, ein Drittel oder ein Viertel (§ 1931 Abs. 4 BGB).</p>
+    <p>Für Schenkungen gilt die Pflichtteilsergänzung (§ 2325 BGB): Eine Schenkung im letzten Jahr vor dem Tod zählt voll, für jedes weitere Jahr ein Zehntel weniger. Nach zehn Jahren zählt sie nicht mehr. Bei Schenkungen an den Ehegatten oder unter Vorbehalt eines Nießbrauchs beginnt die Frist in der Regel nicht zu laufen; der Rechner setzt sie dann voll an.</p>
+    <blockquote><p><strong>Grenzen des Rechners:</strong> Anrechnung von Vorempfängen (§ 2315 BGB), Ausgleichung unter Geschwistern, das Niederstwertprinzip bei Schenkungen, Zugewinnausgleich und Auslandsbezug werden nicht berechnet. Das Ergebnis ist eine Orientierung, keine Rechtsberatung.</p></blockquote>
+
+    <h2>Häufige Fragen</h2>
+    {faq.map((f) => <details class="faq"><summary>{f.q}</summary><p>{f.a}</p></details>)}
+    <CtaBox variant="anfrage" />
+  </section>
+  <script is:inline src="/scripts/rechner.js"></script>
+</Base>

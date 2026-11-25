@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+const fragen = [
+  { id: 'rolle', q: 'In welchem Verhältnis standen Sie zur verstorbenen Person?', a: [['kind', 'Kind oder Enkel'], ['ehegatte', 'Ehegatte / eingetr. Lebenspartner'], ['eltern', 'Elternteil'], ['andere', 'Geschwister, Neffe/Nichte, Lebensgefährte, Freund']] },
+  { id: 'testament', q: 'Wie wurden Sie im Testament oder Erbvertrag bedacht?', a: [['gar-nicht', 'Gar nicht (enterbt)'], ['wenig', 'Nur mit einem kleinen Betrag oder Gegenstand'], ['erbe', 'Ich bin (Mit-)Erbe'], ['unklar', 'Weiß ich nicht / kein Testament bekannt']] },
+  { id: 'zeit', q: 'Wann ist die Person verstorben?', a: [['jung', 'In diesem oder im letzten Jahr'], ['mittel', 'Vor 2 bis 3 Jahren'], ['alt', 'Vor mehr als 3 Jahren']] },
+  { id: 'schenkung', q: 'Hat die verstorbene Person zu Lebzeiten größere Werte verschenkt?', a: [['ja', 'Ja, z. B. Haus, Geld, Firmenanteile'], ['nein', 'Nein'], ['unklar', 'Weiß ich nicht']] },
+  { id: 'verzicht', q: 'Haben Sie jemals einen Pflichtteilsverzicht (beim Notar) unterschrieben?', a: [['nein', 'Nein'], ['ja', 'Ja'], ['unklar', 'Bin mir nicht sicher']] },
+  { id: 'kooperation', q: 'Wie verhält sich der Erbe bzw. die Erbin?', a: [['gut', 'Kooperativ, gibt Auskunft'], ['zaeh', 'Zögerlich oder unvollständig'], ['block', 'Blockiert oder reagiert nicht'], ['kontakt', 'Noch kein Kontakt']] },
+];
+---
+<Base title="Quick-Check: Habe ich einen Pflichtteilsanspruch?" description="In 60 Sekunden prüfen: Sind Sie pflichtteilsberechtigt, läuft eine Frist und sollten Sie jetzt handeln? Mit Ampel-Ergebnis.">
+  <section class="hero" style="padding-bottom:16px">
+    <div class="container narrow">
+      <span class="eyebrow">6 Fragen · 60 Sekunden</span>
+      <h1>Quick-Check: Habe ich einen Pflichtteilsanspruch?</h1>
+      <p class="lead muted">Beantworten Sie sechs kurze Fragen und erhalten Sie eine erste Einschätzung mit den nächsten Schritten.</p>
+    </div>
+  </section>
+  <section class="container narrow">
+    <form id="qc" class="card form-grid">
+      {fragen.map((f, i) => (
+        <fieldset>
+          <legend>{i + 1}. {f.q}</legend>
+          <div class="choice">
+            {f.a.map(([v, l]) => <label><input type="radio" name={f.id} value={v} required /> {l}</label>)}
+          </div>
+        </fieldset>
+      ))}
+      <button class="btn btn-cta" type="submit">Ergebnis anzeigen</button>
+      <p class="hint" style="margin:0">Ihre Antworten bleiben in Ihrem Browser und werden nicht übertragen.</p>
+    </form>
+    <div id="qc-result" class="hidden" style="margin-top:24px" aria-live="polite"></div>
+  </section>
+  <script is:inline src="/scripts/quickcheck.js"></script>
+</Base>

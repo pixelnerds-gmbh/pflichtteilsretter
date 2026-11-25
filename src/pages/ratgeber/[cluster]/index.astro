@@ -1,0 +1,35 @@
+---
+import Base from '../../../layouts/Base.astro';
+import CtaBox from '../../../components/CtaBox.astro';
+import { getCollection } from 'astro:content';
+import { CLUSTERS } from '../../../data/clusters';
+
+export function getStaticPaths() {
+  return CLUSTERS.map((c) => ({ params: { cluster: c.slug }, props: { cluster: c } }));
+}
+const { cluster } = Astro.props;
+const list = (await getCollection('artikel', (a) => a.data.cluster === cluster.slug)).sort((a, b) => a.data.order - b.data.order);
+---
+<Base title={`${cluster.name}: Ratgeber Pflichtteil`} description={cluster.intro} noindex={list.length === 0}>
+  <section class="hero" style="padding-bottom:16px">
+    <div class="container">
+      <nav class="breadcrumbs"><a href="/">Start</a> › <a href="/ratgeber/">Ratgeber</a> › {cluster.name}</nav>
+      <h1>{cluster.name}</h1>
+      <p class="lead muted" style="max-width:60ch">{cluster.intro}</p>
+    </div>
+  </section>
+  <section class="container">
+    {list.length ? (
+      <div class="grid grid-3">
+        {list.map((a) => (
+          <a class="card card-link" href={`/ratgeber/${cluster.slug}/${a.id}/`}>
+            {a.data.pillar && <span class="badge">Grundlagenartikel</span>}
+            <h3 style="margin-top:10px">{a.data.title}</h3>
+            <p class="muted small">{a.data.description}</p>
+          </a>
+        ))}
+      </div>
+    ) : <p class="muted">Artikel zu diesem Thema erscheinen in Kürze. Bis dahin hilft Ihnen der <a href="/quick-check/">Quick-Check</a> weiter.</p>}
+    <CtaBox variant="anfrage" />
+  </section>
+</Base>

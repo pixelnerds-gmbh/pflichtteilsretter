@@ -1,0 +1,28 @@
+---
+import { KANZLEI } from '../config';
+interface Props { variant?: 'rechner' | 'quickcheck' | 'anfrage' }
+const { variant = 'anfrage' } = Astro.props;
+---
+{variant === 'rechner' && (
+  <aside class="cta-box">
+    <h3>Wie hoch ist Ihr Pflichtteil?</h3>
+    <p>Mit unserem Pflichtteilsrechner erhalten Sie in zwei Minuten eine erste Orientierung, inklusive Schenkungen der letzten zehn Jahre.</p>
+    <a href="/rechner/" class="btn btn-cta">Pflichtteil berechnen</a>
+  </aside>
+)}
+{variant === 'quickcheck' && (
+  <aside class="cta-box">
+    <h3>Haben Sie einen Anspruch – und läuft eine Frist?</h3>
+    <p>Sechs Fragen, 60 Sekunden, ein klares Ampel-Ergebnis.</p>
+    <a href="/quick-check/" class="btn btn-cta">Quick-Check starten</a>
+  </aside>
+)}
+{variant === 'anfrage' && (
+  <aside class="cta-box">
+    <span class="badge badge-partner">Partnerkanzlei</span>
+    <h3 style="margin-top:10px">Ihren Fall prüfen lassen</h3>
+    <p>Jeder Erbfall ist anders. Unsere Partnerkanzlei {KANZLEI.name} prüft Ihre Situation{KANZLEI.kostenloseErsteinschaetzung ? ' in einer kostenlosen Ersteinschätzung' : ''} und meldet sich {KANZLEI.antwortzeit}.</p>
+    <a href="/anwalt-finden/#anfrage" class="btn btn-cta">Fall prüfen lassen</a>
+    <p class="disclosure">Hinweis: {KANZLEI.name} ist Kooperationspartner dieses Portals. <a href="/ueber-uns/">Mehr zur Zusammenarbeit</a></p>
+  </aside>
+)}

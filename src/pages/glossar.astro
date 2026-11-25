@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import { GLOSSAR } from '../data/glossar';
+const items = [...GLOSSAR].sort((a, b) => a.begriff.localeCompare(b.begriff, 'de'));
+const slug = (s: string) => s.toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').replace(/[^a-z0-9]+/g, '-');
+const letters = [...new Set(items.map((i) => i.begriff[0].toUpperCase()))];
+const schema = {
+  '@context': 'https://schema.org', '@type': 'DefinedTermSet', name: 'Glossar Pflichtteilsrecht',
+  hasDefinedTerm: items.map((i) => ({ '@type': 'DefinedTerm', name: i.begriff, description: i.text })),
+};
+---
+<Base title="Glossar Pflichtteilsrecht: Begriffe von A bis Z" description="Pflichtteil, Pflichtteilsergänzung, Nachlassverzeichnis, Stufenklage: die wichtigsten Begriffe des Pflichtteilsrechts kurz erklärt." schema={schema}>
+  <section class="hero" style="padding-bottom:8px">
+    <div class="container narrow">
+      <span class="eyebrow">Glossar</span>
+      <h1>Pflichtteilsrecht von A bis Z</h1>
+      <p class="lead muted">Die wichtigsten Begriffe kurz und verständlich erklärt.</p>
+      <nav class="letters" aria-label="Buchstaben">{letters.map((l) => <a href={`#${l}`}>{l}</a>)}</nav>
+    </div>
+  </section>
+  <section class="container narrow">
+    <dl class="glossar-list">
+      {items.map((i, idx) => (
+        <>
+          {(idx === 0 || items[idx - 1].begriff[0].toUpperCase() !== i.begriff[0].toUpperCase()) && <span id={i.begriff[0].toUpperCase()}></span>}
+          <dt id={slug(i.begriff)}>{i.begriff}</dt>
+          <dd>{i.text}{i.paragraf && <span class="muted small"> ({i.paragraf})</span>}{i.link && <> <a href={i.link}>Mehr dazu →</a></>}</dd>
+        </>
+      ))}
+    </dl>
+  </section>
+</Base>

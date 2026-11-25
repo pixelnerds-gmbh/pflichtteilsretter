@@ -1,0 +1,125 @@
+---
+import Base from '../layouts/Base.astro';
+import { KANZLEI, FORM } from '../config';
+
+const wege = [
+  { name: 'Selbst fordern', badge: 'Ohne Anwalt', geeignet: 'Erbe kooperiert, Nachlass überschaubar, keine größeren Schenkungen', kosten: 'Keine (ggf. Kosten für Wertgutachten trägt der Nachlass)', risiko: 'Ansprüche werden leicht zu niedrig angesetzt; Verjährung wird übersehen', link: ['/ratgeber/durchsetzung/pflichtteil-einfordern/', 'Anleitung & Musterschreiben'] },
+  { name: 'Anwalt für Erbrecht', badge: 'Häufigster Weg', geeignet: 'Immobilien, Firmen, Schenkungen, unkooperative Erben, drohende Verjährung', kosten: 'Nach RVG (Gegenstandswert) oder Honorarvereinbarung', risiko: 'Kostenrisiko bei Klage, wenn sie verloren geht', link: ['/ratgeber/durchsetzung/pflichtteil-anwalt-kosten/', 'Was kostet ein Anwalt?'] },
+  { name: 'Rechtsschutz\u00ADversicherung', badge: 'Wenn vorhanden', geeignet: 'Police mit Baustein Erbrecht', kosten: 'Ggf. Selbstbeteiligung', risiko: 'Erbrecht ist oft nur als Erstberatung versichert, nicht für Prozesse', link: ['/ratgeber/durchsetzung/pflichtteil-anwalt-kosten/', 'Rechtsschutz & Kosten'] },
+  { name: 'Prozess\u00ADfinanzierung', badge: 'Hohe Werte', geeignet: 'Hoher Streitwert und gute Erfolgsaussichten', kosten: 'Erfolgsbeteiligung des Finanzierers', risiko: 'Nur ab bestimmten Streitwerten; Anteil am Ergebnis geht ab', link: ['/ratgeber/durchsetzung/pflichtteil-anwalt-kosten/', 'Kostenmodelle im Überblick'] },
+];
+const kriterien = [
+  ['Fachanwalt für Erbrecht', 'Der Titel setzt besondere theoretische Kenntnisse und Fallpraxis im Erbrecht voraus.'],
+  ['Schwerpunkt Pflichtteil', 'Fragen Sie, wie viele Pflichtteilsmandate die Kanzlei jährlich führt.'],
+  ['Erfahrung mit Bewertungen', 'Immobilien- und Unternehmenswerte entscheiden oft über die Höhe des Anspruchs.'],
+  ['Auskunft & Stufenklage', 'Die Kanzlei sollte Auskunftsansprüche konsequent durchsetzen können.'],
+  ['Kostentransparenz', 'Sie sollten vorab wissen, was Erstberatung, außergerichtliches Vorgehen und Klage kosten.'],
+  ['Erreichbarkeit & Online-Mandat', 'Pflichtteilsfälle lassen sich meist ortsunabhängig bearbeiten.'],
+];
+const isNetlify = FORM.provider === 'netlify';
+---
+<Base title="Anwalt für Pflichtteil finden: Wege, Kosten, Kriterien" description="Selbst fordern, Anwalt, Rechtsschutz oder Prozessfinanzierer? Vergleichen Sie die Wege zum Pflichtteil und lassen Sie Ihren Fall von unserer Partnerkanzlei prüfen.">
+  <section class="hero" style="padding-bottom:24px">
+    <div class="container">
+      <span class="eyebrow">Vergleich</span>
+      <h1>Welcher Weg zum Pflichtteil passt zu Ihnen?</h1>
+      <p class="lead muted" style="max-width:60ch">Nicht jeder Pflichtteil braucht einen Anwalt. Vergleichen Sie die vier Wege und entscheiden Sie dann, ob und welche Unterstützung Sie brauchen.</p>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="compare">
+      {wege.map((w) => (
+        <div class="card">
+          <span class="badge">{w.badge}</span>
+          <h3 style="margin:12px 0 0">{w.name}</h3>
+          <dl>
+            <dt>Geeignet wenn</dt><dd>{w.geeignet}</dd>
+            <dt>Kosten</dt><dd>{w.kosten}</dd>
+            <dt>Risiko</dt><dd>{w.risiko}</dd>
+          </dl>
+          <p style="margin:auto 0 0;padding-top:14px"><a href={w.link[0]}>{w.link[1]} →</a></p>
+        </div>
+      ))}
+    </div>
+    <p class="small muted" style="margin-top:12px">Allgemeine Übersicht ohne Gewähr; welche Kosten in Ihrem Fall entstehen, hängt vom Einzelfall ab.</p>
+
+    <h2>Woran Sie einen guten Pflichtteilsanwalt erkennen</h2>
+    <div class="grid grid-3">
+      {kriterien.map(([t, d]) => <div class="card"><h3 style="font-size:1.05rem">✓ {t}</h3><p class="muted" style="margin:0">{d}</p></div>)}
+    </div>
+  </section>
+
+  <section class="section section-alt" id="partnerkanzlei" style="margin-top:56px">
+    <div class="container">
+      <div class="grid grid-2" style="align-items:start;gap:40px">
+        <div>
+          <span class="badge badge-partner">Unsere Partnerkanzlei</span>
+          <h2 style="margin-top:12px">{KANZLEI.name}</h2>
+          <p>{KANZLEI.name} prüft die Inhalte dieses Portals fachlich und steht Ihnen bei Ihrem Pflichtteil persönlich zur Seite{KANZLEI.bundesweit ? ' – bundesweit, auch komplett per Telefon, Video und E-Mail' : ''}.</p>
+          <h3>Schwerpunkte</h3>
+          <ul>{KANZLEI.schwerpunkte.map((s) => <li>{s}</li>)}</ul>
+          <h3>Ansprechpartner</h3>
+          <ul>{KANZLEI.anwaelte.map((a) => <li><strong>{a.name}</strong> – {a.rolle}</li>)}</ul>
+          {KANZLEI.bewertung && (
+            <p><strong>{KANZLEI.bewertung.wert}</strong> aus {KANZLEI.bewertung.anzahl} Bewertungen auf <a href={KANZLEI.bewertung.url} rel="noopener" target="_blank">{KANZLEI.bewertung.quelle}</a></p>
+          )}
+          <p class="small muted">{KANZLEI.strasse}, {KANZLEI.ort} · Tel. <a href={`tel:${KANZLEI.telefonHref}`}>{KANZLEI.telefon}</a> · <a href={KANZLEI.website} rel="noopener" target="_blank">Website der Kanzlei</a></p>
+          <p class="disclosure">Transparenz: {KANZLEI.name} ist Kooperationspartner und finanziert dieses Portal mit einer festen Vergütung. Die Vergütung hängt nicht von Anfragen oder Mandaten ab. <a href="/ueber-uns/">Mehr erfahren</a></p>
+        </div>
+
+        <div class="card" id="anfrage">
+          <h2 style="margin-top:0;font-size:1.5rem">Fall prüfen lassen</h2>
+          <p class="muted">{KANZLEI.kostenloseErsteinschaetzung ? 'Kostenlose und unverbindliche Ersteinschätzung durch ' : 'Ihre Anfrage geht direkt an '}{KANZLEI.name}. Antwort {KANZLEI.antwortzeit}.</p>
+          <form
+            name="anfrage" method="POST" class="form-grid"
+            action={isNetlify ? '/danke/' : FORM.endpoint}
+            data-netlify={isNetlify ? 'true' : undefined}
+            netlify-honeypot={isNetlify ? 'firma' : undefined}
+          >
+            {isNetlify && <input type="hidden" name="form-name" value="anfrage" />}
+            <p class="hidden"><label>Nicht ausfüllen: <input name="firma" /></label></p>
+            <fieldset>
+              <legend>Ihre Rolle</legend>
+              <div class="choice">
+                <label><input type="radio" name="rolle" value="Pflichtteilsberechtigt" checked /> Ich fordere einen Pflichtteil</label>
+                <label><input type="radio" name="rolle" value="Erbe" /> Ich bin Erbe und soll zahlen</label>
+                <label><input type="radio" name="rolle" value="Erblasser" /> Ich plane meinen Nachlass</label>
+              </div>
+            </fieldset>
+            <div class="form-row">
+              <div><label for="a-tod">Todesdatum <span class="hint">(falls zutreffend)</span></label><input type="date" id="a-tod" name="todesdatum" /></div>
+              <div><label for="a-wert">Nachlasswert ca.</label>
+                <select id="a-wert" name="nachlasswert">
+                  <option>unbekannt</option><option>unter 50.000 €</option><option>50.000–250.000 €</option><option>250.000–1 Mio. €</option><option>über 1 Mio. €</option>
+                </select></div>
+            </div>
+            <div>
+              <label for="a-msg">Ihre Situation in wenigen Sätzen</label>
+              <textarea id="a-msg" name="nachricht" rows="5" required placeholder="z. B. Mein Vater ist im März verstorben, im Testament wurde ich nicht bedacht. Zum Nachlass gehört ein Haus …"></textarea>
+            </div>
+            <div class="form-row">
+              <div><label for="a-name">Name</label><input type="text" id="a-name" name="name" autocomplete="name" required /></div>
+              <div><label for="a-mail">E-Mail</label><input type="email" id="a-mail" name="email" autocomplete="email" required /></div>
+            </div>
+            <div class="form-row">
+              <div><label for="a-tel">Telefon <span class="hint">(optional, für Rückruf)</span></label><input type="tel" id="a-tel" name="telefon" autocomplete="tel" /></div>
+              <div><label for="a-zeit">Erreichbar</label>
+                <select id="a-zeit" name="erreichbar"><option>egal</option><option>vormittags</option><option>nachmittags</option><option>abends</option></select></div>
+            </div>
+            <input type="hidden" name="werkzeuge" id="a-tools" />
+            <label class="check"><input type="checkbox" name="einwilligung" value="ja" required /> <span class="small">Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage an {KANZLEI.name} übermittelt werden. Details in der <a href="/datenschutz/">Datenschutzerklärung</a>.</span></label>
+            <button class="btn btn-cta" type="submit">Anfrage absenden</button>
+            <p class="small muted" style="margin:0">Ihre Angaben werden verschlüsselt übertragen und unterliegen der anwaltlichen Schweigepflicht.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script is:inline>
+    try {
+      var parts = [sessionStorage.getItem('ptr-rechner'), sessionStorage.getItem('ptr-quickcheck')].filter(Boolean);
+      if (parts.length) document.getElementById('a-tools').value = parts.join(' | ');
+    } catch (e) {}
+  </script>
+</Base>

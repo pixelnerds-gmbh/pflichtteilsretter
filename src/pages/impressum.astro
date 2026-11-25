@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import { BETREIBER, KANZLEI } from '../config';
+---
+<Base title="Impressum" noindex>
+  <section class="container narrow" style="padding-top:48px">
+    <h1>Impressum</h1>
+    <h2>Angaben gemäß § 5 DDG</h2>
+    <p>{BETREIBER.firma}<br />{BETREIBER.strasse}<br />{BETREIBER.ort}</p>
+    <p><strong>Vertreten durch:</strong> {BETREIBER.inhaber}</p>
+    <p><strong>Kontakt:</strong><br />Telefon: {BETREIBER.telefon}<br />E-Mail: {BETREIBER.email}</p>
+    {BETREIBER.register && <p><strong>Registereintrag:</strong> {BETREIBER.register}</p>}
+    {BETREIBER.ustId && <p><strong>Umsatzsteuer-ID gemäß § 27a UStG:</strong> {BETREIBER.ustId}</p>}
+
+    <h2>Redaktionell verantwortlich nach § 18 Abs. 2 MStV</h2>
+    <p>{BETREIBER.redaktion}</p>
+
+    <h2>Fachliche Prüfung und Kooperation</h2>
+    <p>Die Inhalte werden von {KANZLEI.name}, {KANZLEI.strasse}, {KANZLEI.ort}, fachlich geprüft. {KANZLEI.name} ist Kooperationspartner dieses Portals und finanziert es mit einer festen, erfolgsunabhängigen Vergütung. {BETREIBER.firma} erbringt keine Rechtsdienstleistungen.</p>
+
+    <h2>Haftung für Inhalte</h2>
+    <p>Die Inhalte dieses Portals sind allgemeine Informationen und ersetzen keine Rechtsberatung im Einzelfall. Ergebnisse von Rechner und Quick-Check sind unverbindliche Orientierungen. Trotz sorgfältiger Prüfung übernehmen wir keine Gewähr für Vollständigkeit und Aktualität.</p>
+
+    <h2>Haftung für Links</h2>
+    <p>Für Inhalte externer Websites sind deren Betreiber verantwortlich. Bei Bekanntwerden von Rechtsverletzungen entfernen wir entsprechende Links umgehend.</p>
+
+    <h2>Verbraucherstreitbeilegung</h2>
+    <p>Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+  </section>
+</Base>
