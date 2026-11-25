@@ -26,7 +26,7 @@ const schema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
           <a href="/quick-check/" class="btn btn-ghost">Quick-Check in 60 Sek.</a>
         </div>
         <ul class="trust">
-          <li>Inhalte von Rechtsanwälten geprüft</li>
+          <li>{KANZLEI.inhalteGeprueft ? 'Inhalte von Rechtsanwälten geprüft' : 'Mit Paragrafen und Beispielen'}</li>
           <li>Rechner ohne Anmeldung</li>
           <li>Keine Datenweitergabe ohne Anfrage</li>
         </ul>
@@ -82,10 +82,10 @@ const schema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
       <div class="card">
         <span class="badge badge-partner">Partnerkanzlei</span>
         <h2 style="margin-top:12px;font-size:1.5rem">Persönliche Hilfe von {KANZLEI.name}</h2>
-        <p>Für Ihren konkreten Fall arbeiten wir mit {KANZLEI.name} zusammen. Die Kanzlei prüft auch die Inhalte dieses Portals fachlich.</p>
+        <p>Für Ihren konkreten Fall arbeiten wir mit {KANZLEI.name} zusammen. Die Fachkanzlei für Erbrecht ist an sechs Standorten und per Videoberatung für Sie da.</p>
         <ul>
           {KANZLEI.kostenloseErsteinschaetzung && <li>Kostenlose Ersteinschätzung Ihres Falls</li>}
-          <li>Antwort {KANZLEI.antwortzeit}</li>
+          <li>Schnelle Rückmeldung, fester Ansprechpartner</li>
           {KANZLEI.bundesweit && <li>Bundesweit, auch per Telefon und Video</li>}
         </ul>
         <a href="/anwalt-finden/#anfrage" class="btn btn-cta">Fall prüfen lassen</a>

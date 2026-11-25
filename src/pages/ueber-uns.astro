@@ -12,7 +12,7 @@ import { KANZLEI, BETREIBER } from '../config';
     <p>Der Pflichtteilsretter wird von {BETREIBER.firma} betrieben. Wir sind eine Digitalagentur und keine Rechtsanwaltskanzlei. Wir erbringen keine Rechtsberatung und beantworten keine Fragen zu Einzelfällen.</p>
 
     <h2>Partnerkanzlei {KANZLEI.name}</h2>
-    <p>Alle Ratgeber-Inhalte werden von {KANZLEI.name} fachlich geprüft. Wenn Sie über das Formular eine Anfrage senden, geht diese direkt an die Kanzlei. Ob Sie die Kanzlei beauftragen, entscheiden Sie frei und unverbindlich.</p>
+    <p>{KANZLEI.inhalteGeprueft ? `Alle Ratgeber-Inhalte werden von ${KANZLEI.name} fachlich geprüft.` : `Die Ratgeber-Inhalte werden mit ${KANZLEI.name} fachlich abgestimmt.`} Wenn Sie über das Formular eine Anfrage senden, geht diese direkt an die Kanzlei. Ob Sie die Kanzlei beauftragen, entscheiden Sie frei und unverbindlich.</p>
 
     <h2>Finanzierung</h2>
     <p>{KANZLEI.name} finanziert Aufbau und Betrieb dieses Portals mit einer festen Vergütung. Diese Vergütung hängt nicht davon ab, wie viele Anfragen oder Mandate über das Portal entstehen. Für Sie ist die Nutzung kostenlos.</p>

@@ -24,7 +24,7 @@ const schema: object[] = [
     '@context': 'https://schema.org', '@type': 'Article', headline: d.title, description: d.description,
     dateModified: d.stand.toISOString().slice(0, 10), mainEntityOfPage: url, inLanguage: 'de-DE',
     author: { '@type': 'Organization', name: SITE.name, url: SITE.url },
-    reviewedBy: { '@type': 'Person', name: KANZLEI.pruefer },
+    ...(KANZLEI.inhalteGeprueft ? { reviewedBy: { '@type': 'Person', name: KANZLEI.pruefer } } : {}),
     publisher: { '@type': 'Organization', name: BETREIBER.firma },
   },
   {
@@ -46,7 +46,7 @@ if (d.faq.length) schema.push({ '@context': 'https://schema.org', '@type': 'FAQP
       <div class="byline">
         <span>Stand: {datum}</span>
         <span>{d.lesezeit} Min. Lesezeit</span>
-        <span>Fachlich geprüft von {KANZLEI.pruefer}</span>
+        {KANZLEI.inhalteGeprueft && <span>Fachlich geprüft von {KANZLEI.pruefer}</span>}
       </div>
     </header>
     <div class="layout-article">

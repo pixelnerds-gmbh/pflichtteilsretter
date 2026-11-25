@@ -6,48 +6,56 @@ export const SITE = {
   claim: 'Ihr Pflichtteil ist Ihr Recht.',
   description:
     'Pflichtteil verständlich erklärt: Rechner, Quick-Check, Ratgeber und Musterschreiben. Mit fachlicher Prüfung durch unsere Partnerkanzlei.',
-  email: 'info@pflichtteilsretter.de',
+  email: 'info@pixelnerds.de', // auf info@pflichtteilsretter.de umstellen, sobald die Domain-Postfächer stehen
   // Suchmaschinen erst zum Livegang zulassen: in Netlify die Umgebungsvariable PUBLIC_LIVE=true setzen
   live: import.meta.env.PUBLIC_LIVE === 'true',
 };
 
-// Betreiber = Anbieter im Sinne von § 5 DDG
+// Betreiber = Anbieter im Sinne von § 5 DDG (Angaben von pixelnerds.de/impressum)
 export const BETREIBER = {
-  firma: 'Pixelnerds', // TODO: vollständiger Firmenname inkl. Rechtsform
-  inhaber: 'TODO: Vertretungsberechtigte Person(en)',
-  strasse: 'TODO: Straße Hausnummer',
-  ort: 'TODO: PLZ Ort',
-  telefon: 'TODO: Telefon',
-  email: 'TODO: E-Mail',
-  register: '', // z. B. 'Amtsgericht Duisburg, HRB 12345' – leer lassen, falls nicht vorhanden
-  ustId: '', // z. B. 'DE123456789'
-  redaktion: 'TODO: Name, Anschrift (verantwortlich nach § 18 Abs. 2 MStV)',
+  firma: 'Pixelnerds GmbH',
+  inhaber: 'Philip Leuchtenberg',
+  strasse: 'Unterwallstraße 14',
+  ort: '47441 Moers',
+  telefon: '02841 7816780',
+  email: 'info@pixelnerds.de',
+  register: 'Registergericht Kleve, Handelsregister 13240',
+  ustId: 'DE298216885',
+  redaktion: 'Philip Leuchtenberg, Unterwallstraße 14, 47441 Moers',
 };
 
-// Partnerkanzlei – Angaben aus dem Prototyp übernommen, von GSP prüfen lassen
+// Partnerkanzlei (Angaben von rechtsanwaelte-gsp.de, Stand 25.11.2026)
 export const KANZLEI = {
-  name: 'Rechtsanwälte GSP',
-  website: 'https://www.rechtsanwaelte-gsp.de',
-  strasse: 'Koloniestraße 104', // TODO prüfen
-  ort: '47057 Duisburg', // TODO prüfen
-  telefon: '+49 203 94 19 31 00', // TODO prüfen
-  telefonHref: '+4920394193100',
+  name: 'Scheidt Kalthoff & Partner',
+  rechtsform: 'Scheidt Kalthoff Rechtsanwälte PartG mbB',
+  website: 'https://rechtsanwaelte-gsp.de',
+  strasse: 'Koloniestraße 104',
+  ort: '47057 Duisburg',
+  telefon: '+49 203 70 90 360',
+  telefonHref: '+492037090360',
+  formularEmpfaenger: 'scheidt@rae-gsp.de', // in Netlify unter Forms → Notifications hinterlegt
+  standorte: ['Duisburg (Hauptsitz)', 'Berlin', 'Bochum', 'Dortmund', 'Düsseldorf', 'Essen'],
   anwaelte: [
-    // TODO: echte Anwälte eintragen; Fachanwaltstitel nur, wenn tatsächlich geführt
-    { name: 'RA Scheidt', rolle: 'Rechtsanwalt, Schwerpunkt Erbrecht', pruefer: true },
+    { name: 'Matthias Kalthoff', rolle: 'Rechtsanwalt, Fachanwalt für Erbrecht, Partner' },
+    { name: 'Lena Frescher', rolle: 'Rechtsanwältin, Fachanwältin für Erbrecht' },
+    { name: 'Hannah Kluwig', rolle: 'Rechtsanwältin, Fachanwältin für Erbrecht' },
+    { name: 'Mathias Scheidt', rolle: 'Rechtsanwalt, Fachanwalt für Steuerrecht, Geschäftsführender Partner' },
   ],
-  pruefer: 'RA Scheidt, Rechtsanwälte GSP', // erscheint als „Geprüft von“ unter Artikeln
+  // Erst auf true setzen, wenn die Kanzlei die Inhalte tatsächlich freigegeben hat.
+  // Dann erscheint „Fachlich geprüft von …“ unter den Artikeln.
+  inhalteGeprueft: false,
+  pruefer: 'Matthias Kalthoff, Fachanwalt für Erbrecht', // TODO: von der Kanzlei bestätigen lassen
   schwerpunkte: [
-    'Pflichtteil und Pflichtteilsergänzung',
-    'Auskunfts- und Wertermittlungsansprüche',
-    'Außergerichtliche Einigung mit Erben',
-    'Stufenklage und Prozessvertretung',
-    'Gestaltung für Erblasser (Testament, Pflichtteilsverzicht)',
+    'Fachkanzlei für Erbrecht und Steuerrecht',
+    'Pflichtteil durchsetzen oder unberechtigte Forderungen abwehren',
+    'Auskunfts- und Wertermittlungsansprüche, Stufenklage',
+    'Erbschaftsteuer im Pflichtteilsfall',
+    'Lösungen zur Prozessfinanzierung',
   ],
-  // Nur auf true setzen, wenn GSP das wirklich so anbietet:
-  kostenloseErsteinschaetzung: true, // TODO bestätigen
-  antwortzeit: 'in der Regel innerhalb eines Werktags', // TODO bestätigen
-  bundesweit: true, // TODO bestätigen
+  // Nur auf true setzen, wenn die Kanzlei das wirklich so anbietet:
+  kostenloseErsteinschaetzung: false, // TODO: mit der Kanzlei klären
+  antwortzeit: 'schnellstmöglich',
+  bundesweit: true, // Videoberatung laut Kanzlei-Website
   bewertung: null as null | { quelle: string; url: string; wert: string; anzahl: number },
 };
 
