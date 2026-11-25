@@ -81,15 +81,15 @@ const schema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
       </div>
       <div class="card">
         <span class="badge badge-partner">Partnerkanzlei</span>
-        <h2 style="margin-top:12px;font-size:1.5rem">Persönliche Hilfe von der Kanzlei {KANZLEI.name}</h2>
-        <p>Für Ihren konkreten Fall arbeiten wir mit der Kanzlei {KANZLEI.name} zusammen. Die Fachkanzlei für Erbrecht ist an sechs Standorten und per Videoberatung für Sie da.</p>
+        <h2 style="margin-top:12px;font-size:1.5rem">Persönliche Hilfe von {KANZLEI.dat}</h2>
+        <p>Für Ihren konkreten Fall arbeiten wir mit {KANZLEI.dat} zusammen. Die Fachkanzlei für Erbrecht ist an sechs Standorten und per Videoberatung für Sie da.</p>
         <ul>
           {KANZLEI.kostenloseErsteinschaetzung && <li>Kostenlose Ersteinschätzung Ihres Falls</li>}
           <li>Schnelle Rückmeldung, fester Ansprechpartner</li>
           {KANZLEI.bundesweit && <li>Bundesweit, auch per Telefon und Video</li>}
         </ul>
         <a href="/anwalt-finden/#anfrage" class="btn btn-cta">Fall prüfen lassen</a>
-        <p class="disclosure">{KANZLEI.name} finanziert dieses Portal mit einer festen Vergütung. <a href="/ueber-uns/">Transparenz</a></p>
+        <p class="disclosure">{KANZLEI.nom.charAt(0).toUpperCase() + KANZLEI.nom.slice(1)} finanzieren dieses Portal mit einer festen Vergütung. <a href="/ueber-uns/">Transparenz</a></p>
       </div>
     </div>
   </section>

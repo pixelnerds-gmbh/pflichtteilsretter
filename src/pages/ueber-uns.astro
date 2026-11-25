@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { KANZLEI, BETREIBER } from '../config';
 ---
-<Base title="Über uns & Transparenz" description={`Wer hinter dem Pflichtteilsretter steht, wie das Portal finanziert wird und welche Rolle ${KANZLEI.name} spielt.`}>
+<Base title="Über uns & Transparenz" description={`Wer hinter dem Pflichtteilsretter steht, wie das Portal finanziert wird und welche Rolle ${KANZLEI.nom} spielen.`}>
   <section class="container narrow" style="padding-top:48px">
     <span class="eyebrow">Über uns</span>
     <h1>Wer hinter dem Pflichtteilsretter steht</h1>
@@ -12,10 +12,10 @@ import { KANZLEI, BETREIBER } from '../config';
     <p>Der Pflichtteilsretter wird von {BETREIBER.firma} betrieben. Wir sind eine Digitalagentur und keine Rechtsanwaltskanzlei. Wir erbringen keine Rechtsberatung und beantworten keine Fragen zu Einzelfällen.</p>
 
     <h2>Partnerkanzlei {KANZLEI.name}</h2>
-    <p>{KANZLEI.inhalteGeprueft ? `Alle Ratgeber-Inhalte werden von ${KANZLEI.name} fachlich geprüft.` : `Die Ratgeber-Inhalte werden mit ${KANZLEI.name} fachlich abgestimmt.`} Wenn Sie über das Formular eine Anfrage senden, geht diese direkt an die Kanzlei. Ob Sie die Kanzlei beauftragen, entscheiden Sie frei und unverbindlich.</p>
+    <p>{KANZLEI.inhalteGeprueft ? `Alle Ratgeber-Inhalte werden von ${KANZLEI.dat} fachlich geprüft.` : `Die Ratgeber-Inhalte werden mit ${KANZLEI.dat} fachlich abgestimmt.`} Wenn Sie über das Formular eine Anfrage senden, geht diese direkt an die Kanzlei. Ob Sie die Kanzlei beauftragen, entscheiden Sie frei und unverbindlich.</p>
 
     <h2>Finanzierung</h2>
-    <p>{KANZLEI.name} finanziert Aufbau und Betrieb dieses Portals mit einer festen Vergütung. Diese Vergütung hängt nicht davon ab, wie viele Anfragen oder Mandate über das Portal entstehen. Für Sie ist die Nutzung kostenlos.</p>
+    <p>{KANZLEI.nom.charAt(0).toUpperCase() + KANZLEI.nom.slice(1)} finanzieren Aufbau und Betrieb dieses Portals mit einer festen Vergütung. Diese Vergütung hängt nicht davon ab, wie viele Anfragen oder Mandate über das Portal entstehen. Für Sie ist die Nutzung kostenlos.</p>
 
     <h2>Unsere Grundsätze</h2>
     <ul>

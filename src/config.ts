@@ -26,7 +26,10 @@ export const BETREIBER = {
 
 // Partnerkanzlei (Angaben von rechtsanwaelte-gsp.de, Stand 25.11.2026)
 export const KANZLEI = {
-  name: 'Scheidt Kalthoff & Partner',
+  name: 'Rechtsanwälte GSP', // für Überschriften und Labels
+  nom: 'die Rechtsanwälte GSP', // im Satz: „… prüfen Ihren Fall“ (Plural!)
+  dat: 'den Rechtsanwälten GSP', // „mit/von/bei …“
+  akk: 'die Rechtsanwälte GSP', // „an …“
   rechtsform: 'Scheidt Kalthoff Rechtsanwälte PartG mbB',
   website: 'https://rechtsanwaelte-gsp.de',
   strasse: 'Koloniestraße 104',

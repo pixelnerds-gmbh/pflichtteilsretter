@@ -26,7 +26,7 @@ const orgSchema = {
   name: SITE.name,
   url: SITE.url,
   email: SITE.email,
-  description: 'Ratgeberportal zum Pflichtteilsrecht, betrieben von ' + BETREIBER.firma + ', in Kooperation mit ' + KANZLEI.name + '.',
+  description: 'Ratgeberportal zum Pflichtteilsrecht, betrieben von ' + BETREIBER.firma + ', in Kooperation mit ' + KANZLEI.dat + '.',
 };
 const schemas = [orgSchema, ...(Array.isArray(schema) ? schema : schema ? [schema] : [])];
 ---
@@ -51,7 +51,7 @@ const schemas = [orgSchema, ...(Array.isArray(schema) ? schema : schema ? [schem
   </head>
   <body>
     <div class="partner-bar">
-      Verständliches Wissen, persönliche Hilfe: Rechtliche Beratung erhalten Sie über unsere <a href="/anwalt-finden/#partnerkanzlei">Partnerkanzlei {KANZLEI.name}</a>.
+      Verständliches Wissen, persönliche Hilfe: Rechtliche Beratung erhalten Sie über unsere Partnerkanzlei, <a href="/anwalt-finden/#partnerkanzlei">{KANZLEI.nom}</a>.
     </div>
     <header class="site-header">
       <div class="container">
@@ -74,7 +74,7 @@ const schemas = [orgSchema, ...(Array.isArray(schema) ? schema : schema ? [schem
         <div class="footer-grid">
           <div>
             <a href="/" class="logo" style="color:#fff">{SITE.name}</a>
-            <p style="margin-top:12px">Das Ratgeberportal rund um Pflichtteil und Pflichtteilsergänzung. Betrieben von {BETREIBER.firma} in Kooperation mit der Kanzlei {KANZLEI.name}.</p>
+            <p style="margin-top:12px">Das Ratgeberportal rund um Pflichtteil und Pflichtteilsergänzung. Betrieben von {BETREIBER.firma} in Kooperation mit {KANZLEI.dat}.</p>
             <p class="small">Die Inhalte sind allgemeine Informationen und ersetzen keine Rechtsberatung im Einzelfall.</p>
           </div>
           <div>
@@ -100,7 +100,7 @@ const schemas = [orgSchema, ...(Array.isArray(schema) ? schema : schema ? [schem
           </div>
         </div>
         <div class="footer-bottom">
-          © {new Date().getFullYear()} {BETREIBER.firma} · In Kooperation mit {KANZLEI.name}. {BETREIBER.firma} erbringt keine Rechtsdienstleistungen. Das Portal wird von der Partnerkanzlei mit einer festen Vergütung finanziert, nicht pro Anfrage oder Mandat.
+          © {new Date().getFullYear()} {BETREIBER.firma} · In Kooperation mit {KANZLEI.dat}. {BETREIBER.firma} erbringt keine Rechtsdienstleistungen. Das Portal wird von der Partnerkanzlei mit einer festen Vergütung finanziert, nicht pro Anfrage oder Mandat.
         </div>
       </div>
     </footer>

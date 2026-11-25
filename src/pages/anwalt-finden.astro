@@ -56,7 +56,7 @@ const isNetlify = FORM.provider === 'netlify';
         <div>
           <span class="badge badge-partner">Unsere Partnerkanzlei</span>
           <h2 style="margin-top:12px">{KANZLEI.name}</h2>
-          <p>{KANZLEI.name} ist eine Fachkanzlei für Erbrecht und Steuerrecht und steht Ihnen bei Ihrem Pflichtteil persönlich zur Seite{KANZLEI.bundesweit ? ' – an sechs Standorten und bundesweit per Videoberatung' : ''}.</p>
+          <p>{KANZLEI.nom.charAt(0).toUpperCase() + KANZLEI.nom.slice(1)} sind eine Fachkanzlei für Erbrecht und Steuerrecht und stehen Ihnen bei Ihrem Pflichtteil persönlich zur Seite{KANZLEI.bundesweit ? ' – an sechs Standorten und bundesweit per Videoberatung' : ''}.</p>
           <h3>Schwerpunkte</h3>
           <ul>{KANZLEI.schwerpunkte.map((s) => <li>{s}</li>)}</ul>
           <h3>Ansprechpartner</h3>
@@ -67,12 +67,12 @@ const isNetlify = FORM.provider === 'netlify';
           <h3>Standorte</h3>
           <p>{KANZLEI.standorte.join(' · ')}</p>
           <p class="small muted">Hauptsitz: {KANZLEI.strasse}, {KANZLEI.ort} · Tel. <a href={`tel:${KANZLEI.telefonHref}`}>{KANZLEI.telefon}</a> · <a href={KANZLEI.website} rel="noopener" target="_blank">Website der Kanzlei</a></p>
-          <p class="disclosure">Transparenz: {KANZLEI.name} ist Kooperationspartner und finanziert dieses Portal mit einer festen Vergütung. Die Vergütung hängt nicht von Anfragen oder Mandaten ab. <a href="/ueber-uns/">Mehr erfahren</a></p>
+          <p class="disclosure">Transparenz: {KANZLEI.nom.charAt(0).toUpperCase() + KANZLEI.nom.slice(1)} sind Kooperationspartner und finanzieren dieses Portal mit einer festen Vergütung. Die Vergütung hängt nicht von Anfragen oder Mandaten ab. <a href="/ueber-uns/">Mehr erfahren</a></p>
         </div>
 
         <div class="card" id="anfrage">
           <h2 style="margin-top:0;font-size:1.5rem">Fall prüfen lassen</h2>
-          <p class="muted">{KANZLEI.kostenloseErsteinschaetzung ? 'Kostenlose und unverbindliche Ersteinschätzung durch ' : 'Ihre Anfrage geht direkt an '}{KANZLEI.name}. Sie erhalten {KANZLEI.antwortzeit} eine Rückmeldung.</p>
+          <p class="muted">{KANZLEI.kostenloseErsteinschaetzung ? 'Kostenlose und unverbindliche Ersteinschätzung durch ' : 'Ihre Anfrage geht direkt an '}{KANZLEI.akk}. Sie erhalten {KANZLEI.antwortzeit} eine Rückmeldung.</p>
           <form
             name="anfrage" method="POST" class="form-grid"
             action={isNetlify ? '/danke/' : FORM.endpoint}
@@ -110,7 +110,7 @@ const isNetlify = FORM.provider === 'netlify';
                 <select id="a-zeit" name="erreichbar"><option>egal</option><option>vormittags</option><option>nachmittags</option><option>abends</option></select></div>
             </div>
             <input type="hidden" name="werkzeuge" id="a-tools" />
-            <label class="check"><input type="checkbox" name="einwilligung" value="ja" required /> <span class="small">Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage an {KANZLEI.name} übermittelt werden. Details in der <a href="/datenschutz/">Datenschutzerklärung</a>.</span></label>
+            <label class="check"><input type="checkbox" name="einwilligung" value="ja" required /> <span class="small">Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage an {KANZLEI.akk} übermittelt werden. Details in der <a href="/datenschutz/">Datenschutzerklärung</a>.</span></label>
             <button class="btn btn-cta" type="submit">Anfrage absenden</button>
             <p class="small muted" style="margin:0">Ihre Angaben werden verschlüsselt übertragen und unterliegen der anwaltlichen Schweigepflicht.</p>
           </form>

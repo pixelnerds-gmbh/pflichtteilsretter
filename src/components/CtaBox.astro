@@ -21,8 +21,8 @@ const { variant = 'anfrage' } = Astro.props;
   <aside class="cta-box">
     <span class="badge badge-partner">Partnerkanzlei</span>
     <h3 style="margin-top:10px">Ihren Fall prüfen lassen</h3>
-    <p>Jeder Erbfall ist anders. Unsere Partnerkanzlei {KANZLEI.name} prüft Ihre Situation{KANZLEI.kostenloseErsteinschaetzung ? ' in einer kostenlosen Ersteinschätzung' : ''} und meldet sich {KANZLEI.antwortzeit}.</p>
+    <p>Jeder Erbfall ist anders. {KANZLEI.nom.charAt(0).toUpperCase() + KANZLEI.nom.slice(1)}, unsere Partnerkanzlei, prüfen Ihre Situation{KANZLEI.kostenloseErsteinschaetzung ? ' in einer kostenlosen Ersteinschätzung' : ''} und melden sich {KANZLEI.antwortzeit} bei Ihnen.</p>
     <a href="/anwalt-finden/#anfrage" class="btn btn-cta">Fall prüfen lassen</a>
-    <p class="disclosure">Hinweis: {KANZLEI.name} ist Kooperationspartner dieses Portals. <a href="/ueber-uns/">Mehr zur Zusammenarbeit</a></p>
+    <p class="disclosure">Hinweis: {KANZLEI.nom.charAt(0).toUpperCase() + KANZLEI.nom.slice(1)} sind Kooperationspartner dieses Portals. <a href="/ueber-uns/">Mehr zur Zusammenarbeit</a></p>
   </aside>
 )}
