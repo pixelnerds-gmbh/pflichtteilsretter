@@ -2,11 +2,11 @@
 
 export const SITE = {
   name: 'Pflichtteilsretter',
-  url: 'https://www.pflichtteilsretter.de',
+  url: 'https://www.pflichtteils-retter.de',
   claim: 'Ihr Pflichtteil ist Ihr Recht.',
   description:
     'Pflichtteil verständlich erklärt: Rechner, Quick-Check, Ratgeber und Musterschreiben. Mit fachlicher Prüfung durch unsere Partnerkanzlei.',
-  email: 'info@pixelnerds.de', // auf info@pflichtteilsretter.de umstellen, sobald die Domain-Postfächer stehen
+  email: 'info@pixelnerds.de', // auf info@pflichtteils-retter.de umstellen, sobald die Domain-Postfächer stehen
   // Suchmaschinen erst zum Livegang zulassen: in Netlify die Umgebungsvariable PUBLIC_LIVE=true setzen
   live: import.meta.env.PUBLIC_LIVE === 'true',
 };

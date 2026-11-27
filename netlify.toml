@@ -14,7 +14,7 @@
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
 [[redirects]]
-  from = "https://pflichtteilsretter.de/*"
-  to = "https://www.pflichtteilsretter.de/:splat"
+  from = "https://pflichtteils-retter.de/*"
+  to = "https://www.pflichtteils-retter.de/:splat"
   status = 301
   force = true

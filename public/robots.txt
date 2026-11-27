@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /danke/
 
-Sitemap: https://www.pflichtteilsretter.de/sitemap-index.xml
+Sitemap: https://www.pflichtteils-retter.de/sitemap-index.xml
