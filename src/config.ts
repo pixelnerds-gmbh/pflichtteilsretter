@@ -1,7 +1,7 @@
 // Zentrale Angaben. Alles mit "TODO" vor dem Livegang ausfüllen bzw. prüfen.
 
 export const SITE = {
-  name: 'Pflichtteilsretter',
+  name: 'pflichtteils-retter.de',
   url: 'https://pflichtteils-retter.de',
   claim: 'Ihr Pflichtteil ist Ihr Recht.',
   description:

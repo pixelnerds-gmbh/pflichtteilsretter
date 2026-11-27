@@ -2,14 +2,14 @@
 import Base from '../layouts/Base.astro';
 import { KANZLEI, BETREIBER } from '../config';
 ---
-<Base title="Über uns & Transparenz" description={`Wer hinter dem Pflichtteilsretter steht, wie das Portal finanziert wird und welche Rolle ${KANZLEI.nom} spielen.`}>
+<Base title="Über uns & Transparenz" description={`Wer hinter pflichtteils-retter.de steht, wie das Portal finanziert wird und welche Rolle ${KANZLEI.nom} spielen.`}>
   <section class="container narrow" style="padding-top:48px">
     <span class="eyebrow">Über uns</span>
-    <h1>Wer hinter dem Pflichtteilsretter steht</h1>
+    <h1>Wer hinter pflichtteils-retter.de steht</h1>
     <p class="lead muted">Offen gesagt: Dieses Portal ist ein Ratgeber mit einer Partnerkanzlei. Hier steht, wie das zusammenhängt.</p>
 
     <h2>Betreiber</h2>
-    <p>Der Pflichtteilsretter wird von {BETREIBER.firma} betrieben. Wir sind eine Digitalagentur und keine Rechtsanwaltskanzlei. Wir erbringen keine Rechtsberatung und beantworten keine Fragen zu Einzelfällen.</p>
+    <p>pflichtteils-retter.de wird von {BETREIBER.firma} betrieben. Wir sind eine Digitalagentur und keine Rechtsanwaltskanzlei. Wir erbringen keine Rechtsberatung und beantworten keine Fragen zu Einzelfällen.</p>
 
     <h2>Partnerkanzlei {KANZLEI.name}</h2>
     <p>{KANZLEI.inhalteGeprueft ? `Alle Ratgeber-Inhalte werden von ${KANZLEI.dat} fachlich geprüft.` : `Die Ratgeber-Inhalte werden mit ${KANZLEI.dat} fachlich abgestimmt.`} Wenn Sie über das Formular eine Anfrage senden, geht diese direkt an die Kanzlei. Ob Sie die Kanzlei beauftragen, entscheiden Sie frei und unverbindlich.</p>
