@@ -4,6 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  PUBLIC_LIVE = "true"  # Seite für Suchmaschinen freigegeben (27.11.2026)
 
 [[headers]]
   for = "/*"
