@@ -38,6 +38,7 @@ const schemas = [orgSchema, ...(Array.isArray(schema) ? schema : schema ? [schem
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <meta name="google-site-verification" content="uwMJa9PYLOakQM9tKqVN6nXcdMP-IwfGD3hc9dG6kNk" />
     {(noindex || !SITE.live) && <meta name="robots" content={SITE.live ? 'noindex' : 'noindex, nofollow'} />}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />
