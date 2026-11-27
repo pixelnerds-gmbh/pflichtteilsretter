@@ -2,7 +2,7 @@
 
 export const SITE = {
   name: 'Pflichtteilsretter',
-  url: 'https://www.pflichtteils-retter.de',
+  url: 'https://pflichtteils-retter.de',
   claim: 'Ihr Pflichtteil ist Ihr Recht.',
   description:
     'Pflichtteil verständlich erklärt: Rechner, Quick-Check, Ratgeber und Musterschreiben. Mit fachlicher Prüfung durch unsere Partnerkanzlei.',
